@@ -1,0 +1,35 @@
+{
+  "name": "todoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buildDev": "npx webpack --config ./webpack.dev.js",
+    "WatchDev": "npx webpack --config ./webpack.dev.js --watch",
+    "buildProd": "npx webpack --config ./webpack.prod.js",
+    "watchProd": "npx webpack --config ./webpack.prod.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elton-1/todoApp.git"
+  },
+  "author": "elton <elton.rexha123@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Elton-1/todoApp/issues"
+  },
+  "homepage": "https://github.com/Elton-1/todoApp#readme",
+  "devDependencies": {
+    "css-loader": "^6.10.0",
+    "css-minimizer-webpack-plugin": "^6.0.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^5.0.0",
+    "html-minimizer-webpack-plugin": "^5.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.10.0"
+  }
+}
