@@ -49,7 +49,7 @@ export default function(){
 
   const extract = () => {
     const temp = heap[0];
-    heap[0] = heap.pop();;  
+    heap[0] = heap.pop();
     heapifyDown(0);
     return temp;
   }
