@@ -1,7 +1,7 @@
 import Heap from "./maxHeap.module.mjs";
 
 //Creates an heap like structure where you can add an object with the priority property and based on that it will store it into an heap :)
-export default function (updateTimage = 1 * 60 * 1000) {
+export default function (updateTimage = 1 * 60 * 1000, creationDate) {
   let heap = Heap();
   let objs = [];
 
@@ -10,7 +10,7 @@ export default function (updateTimage = 1 * 60 * 1000) {
     objs.push(obj);
   }
 
-  function getMostPriorityObject() {
+  function peekPriorityObject() {
     let PriorityObject = null;
 
     objs.forEach((obj) => {
@@ -18,6 +18,25 @@ export default function (updateTimage = 1 * 60 * 1000) {
         PriorityObject = obj;
       }
     });
+
+    return PriorityObject;
+  }
+
+  function extractPriorityObject() {
+    let PriorityObject = null;
+    const nextHeap = heap.peek();
+
+    objs.forEach((obj) => {
+      if (obj.priority === nextHeap) {
+        PriorityObject = obj;
+      }
+    });
+
+    //remove it from the objects
+    heap.extract();
+    objs = objs.filter((obj) => {
+      return obj !== PriorityObject;
+    })
 
     return PriorityObject;
   }
@@ -42,5 +61,5 @@ export default function (updateTimage = 1 * 60 * 1000) {
     });
   }, updateTimage);
 
-  return { insert, getMostPriorityObject};
+  return { insert, extractPriorityObject, peekPriorityObject, creationDate};
 }

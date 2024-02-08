@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <aside class="left-side">
+          <h1 class="projects-header">My Projects</h1>
+          <button class="create-project-btn">Create Project</button>
+          <ol class="project list">
+            <details class="detail">
+              <summary>Today</summary>
+            </details>
+            <details class="detail">
+              <summary>This week</summary>
+            </details>
+            <details class="detail">
+              <summary>This month</summary>
+            </details>
+            <details class="detail">
+              <summary>All projects</summary>
+            </details>
+          </ol>
+        </aside>
+        <div class="card-container">
+          <nav class="card-navigation">
+            <button class="new-todo-btn">+</button>
+            <h1 class="current-prj-header"></h1>
+          </nav>
+          <div class="card-wrapper">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const cardContainer = document.querySelector(".card-container");
+      const wrapper = document.querySelector(".wrapper");
+
+      if (cardContainer.style.display === "none") {
+        wrapper.style.display = "block";
+        cardContainer.style.height = "fit-content";
+        wrapper.style.height = "fit-content";
+      }
+    </script>
+  </body>
 </html>
