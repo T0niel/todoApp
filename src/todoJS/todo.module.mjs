@@ -10,7 +10,7 @@ export default function (title, description, duedate, priority, color) {
   }
 
   function hasExpiried() {
-    return (new Date()) >= duedate;
+    return new Date() >= duedate;
   }
 
   return {
@@ -21,8 +21,6 @@ export default function (title, description, duedate, priority, color) {
     priority,
     changeClr,
     getClr,
-    dateOfCreation: `${date.getDate()}, ${
-      date.getMonth() + 1
-    }, ${date.getFullYear()}`,
+    dateOfCreation: new Date()
   };
 }

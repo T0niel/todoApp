@@ -7,6 +7,22 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="left-text">
+            <label for="title">Title: </label>
+            <input type="text" id="title">
+            <label for="description">Description: </label>
+            <textarea id="description" cols="30" rows="10"></textarea>
+            <label for="date">Due date: </label>
+            <input type="date" id="date">
+            <label for="number">Priority number: </label>
+            <input type="number" id="number" value="0" min="0" max="50">
+            <button class="new-todo-btn"">Create</button>
+        </div>
+        <div class="close">&times;</div>
+    </div>
+    </div>
     <div class="container">
       <div class="wrapper">
         <aside class="left-side">
@@ -32,9 +48,7 @@
             <button class="new-todo-btn">+</button>
             <h1 class="current-prj-header"></h1>
           </nav>
-          <div class="card-wrapper">
-            
-          </div>
+          <div class="card-wrapper"></div>
         </div>
       </div>
     </div>
