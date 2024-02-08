@@ -5,7 +5,7 @@ const htmlWebpackPlugin = require("html-webpack-plugin");
     mode: "production",
    entry: './src/index.js',
    output: {
-     filename: 'bundle.js',
+     filename: 'bundle.[hashcontent].js',
      path: path.resolve(__dirname, 'build'),
      clean: true
    },
