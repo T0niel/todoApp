@@ -2,10 +2,13 @@ const path = require('path');
 const htmlWebpackPlugin = require("html-webpack-plugin");
 
  module.exports = {
-    mode: "production",
-   entry: './src/index.js',
+  devtool: "source-map",
+    mode: "development",
+   entry: {
+    index: './src/index.js'
+   },
    output: {
-     filename: 'bundle.[hashcontent].js',
+     filename: '[name].[contenthash].js',
      path: path.resolve(__dirname, 'build'),
      clean: true
    },

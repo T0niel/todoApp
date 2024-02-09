@@ -1,4 +1,4 @@
-export default function (title, description, duedate, priority, color) {
+export default function (title, description, duedate, priority, color, printFun) {
   const date = new Date();
 
   function changeClr(clr) {
@@ -13,6 +13,10 @@ export default function (title, description, duedate, priority, color) {
     return new Date() >= duedate;
   }
 
+  function print(){
+    printFun(title, description, duedate, priority, color);
+  }
+
   return {
     title,
     description,
@@ -21,6 +25,7 @@ export default function (title, description, duedate, priority, color) {
     priority,
     changeClr,
     getClr,
+    print,
     dateOfCreation: new Date()
   };
 }

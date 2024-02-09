@@ -1,4 +1,4 @@
-export default function(){
+export default function () {
   let heap = [];
 
   const heapifyUp = (index) => {
@@ -45,23 +45,27 @@ export default function(){
     }
   };
 
-  const peek = () => (heap.length > 0) ? heap[0] : null;
+  const peek = () => (heap.length > 0 ? heap[0] : null);
 
   const extract = () => {
-    const temp = heap[0];
-    heap[0] = heap.pop();
-    heapifyDown(0);
-    return temp;
-  }
+    if (heap.length > 0) {
+      const temp = heap[0];
+      heap[0] = heap.pop();
+      heapifyDown(0);
+      return temp;
+    }
+
+    return null;
+  };
 
   const insert = (element) => {
     heap.push(element);
     heapifyUp(heap.length - 1);
-  }
+  };
 
   const getLeftChild = (index) => index * 2 + 1;
   const getRightChild = (index) => index * 2 + 2;
   const getParent = (index) => Math.floor((index - 1) / 2);
 
-  return {insert, extract, peek};
+  return { insert, extract, peek };
 }

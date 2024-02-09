@@ -174,17 +174,23 @@ div.container,
   color: var(--second-text-clr);
 }
 
-.wrapper {
+.wrapper.grid {
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-areas: "nav cardContainer";
+  border-right: 5px solid var(--gold-clr);
+}
+
+.wrapper.block{
+  display: block;
+  height: fit-content;
+  border-right: none;
 }
 
 aside.left-side {
   padding: 1rem;
   background-color: var(--second-text-clr);
   color: var(--secondary-background-clr);
-  border-right: 5px solid var(--gold-clr);
   height: 100%;
   grid-area: nav;
 }
@@ -215,6 +221,7 @@ button {
   cursor: pointer;
 }
 
+.create-btn,
 .create-project-btn,
 .new-todo-btn {
   background-color: var(--agree-clr);
@@ -278,6 +285,7 @@ button {
   background-color: #e3504b;
 }
 
+.create-btn:hover,
 .new-todo-btn:hover,
 .create-project-btn:hover {
   background-color: var(--agree-clr-hover);
@@ -291,6 +299,9 @@ button {
 }
 
 .modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   z-index: 1;
   left: 0;
@@ -304,7 +315,6 @@ button {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
@@ -331,6 +341,17 @@ div.close{
 
 .modal-content{
     color: var(--second-text-clr);
+}
+
+.close{
+  font-size: 2rem;
+}
+
+.project-btn{
+  background-color: var(--main-text-clr);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
 }
 
 @media only screen and (max-width: 70rem) {

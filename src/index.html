@@ -10,34 +10,36 @@
       <div class="modal-content">
         <div class="left-text">
             <label for="title">Title: </label>
-            <input type="text" id="title">
+            <input type="text" id="title" minlength="3" required>
             <label for="description">Description: </label>
-            <textarea id="description" cols="30" rows="10"></textarea>
+            <textarea id="description" cols="30" rows="10" minlength="5" required></textarea>
             <label for="date">Due date: </label>
-            <input type="date" id="date">
-            <label for="number">Priority number: </label>
-            <input type="number" id="number" value="0" min="0" max="50">
-            <button class="new-todo-btn"">Create</button>
+            <input type="date" id="date" required>
+            <label for="priority">Priority number: </label>
+            <input type="number" id="priority" value="0" min="0" max="50" required>
+            <label for="color">Color: </label>
+            <input type="color" id="color">
+            <button class="create-btn"">Create</button>
         </div>
         <div class="close">&times;</div>
     </div>
     </div>
     <div class="container">
-      <div class="wrapper">
+      <div class="wrapper grid">
         <aside class="left-side">
           <h1 class="projects-header">My Projects</h1>
           <button class="create-project-btn">Create Project</button>
           <ol class="project list">
-            <details class="detail">
+            <details class="detail today-projects">
               <summary>Today</summary>
             </details>
-            <details class="detail">
+            <details class="detail week-projects">
               <summary>This week</summary>
             </details>
-            <details class="detail">
+            <details class="detail month-projects">
               <summary>This month</summary>
             </details>
-            <details class="detail">
+            <details class="detail all-projects">
               <summary>All projects</summary>
             </details>
           </ol>
@@ -51,15 +53,5 @@
         </div>
       </div>
     </div>
-    <script>
-      const cardContainer = document.querySelector(".card-container");
-      const wrapper = document.querySelector(".wrapper");
-
-      if (cardContainer.style.display === "none") {
-        wrapper.style.display = "block";
-        cardContainer.style.height = "fit-content";
-        wrapper.style.height = "fit-content";
-      }
-    </script>
   </body>
 </html>
