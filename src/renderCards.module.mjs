@@ -1,21 +1,20 @@
-export default function (
-  formatter
-) {
-  return (todoObj, cardWrapper, duedate, dateOfCreation, color) => {
-    const dueDateFormated = formatter(duedate, new Date());
+export default function (formatter, cardWrapper) {
+  function fun(obj){
 
-    const dateOfCreationFormated = formatter(dateOfCreation, new Date());
+    const dueDateFormated = formatter(obj.duedate, new Date());
+
+    const dateOfCreationFormated = formatter(obj.dateOfCreation, new Date());
 
     const card = document.createElement("div");
     card.classList.add("card");
-    card.style.backgroundColor = color;
+    card.style.backgroundColor = obj.getClr();
 
     const heading = document.createElement("h1");
     heading.classList.add("title");
-    heading.textContent = todoObj.title;
+    heading.textContent = obj.title;
 
     const paragraph = document.createElement("p");
-    paragraph.textContent = todoObj.description;
+    paragraph.textContent = obj.description;
 
     const dueDate = document.createElement("p");
     dueDate.classList.add("due-date");
@@ -28,7 +27,7 @@ export default function (
 
     const priority = document.createElement("p");
     priority.classList.add("priority");
-    priority.textContent = "Has priority of: " + todoObj.priority;
+    priority.textContent = "Has priority of: " + obj.priority;
 
     const btns = document.createElement("div");
     btns.classList.add("btns");
@@ -51,5 +50,7 @@ export default function (
     card.appendChild(btns);
 
     cardWrapper.appendChild(card);
-  };
+  }
+
+  return fun;
 }

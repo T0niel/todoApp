@@ -18,6 +18,7 @@ const run = () => {
   const priorityInput = document.querySelector("input#priority");
   const cardContainer = document.querySelector(".card-container");
   const wrapper = document.querySelector(".wrapper");
+  const cardWrapper = document.querySelector(".card-wrapper");
   const todayProjects = document.querySelector("details.today-projects");
   const monthlyProjects = document.querySelector("details.month-projects");
   const weekProjects = document.querySelector("details.week-projects");
@@ -31,6 +32,7 @@ const run = () => {
   const monthPrinted = [];
   const allPrinted = [];
   const weekprinted = [];
+  const printedObjs = [];
 
   let currentProject = null;
 
@@ -45,18 +47,19 @@ const run = () => {
   }
 
   function createProject(name) {
-    projects.push(new project(name));
+    projects.push(new project(name, reset));
+  }
+
+  function reset(){
+    while (cardWrapper.firstChild) {
+      cardWrapper.removeChild(cardWrapper.firstChild);
+    }
   }
 
   function printCurrentProject() {
+    reset();
     if (currentProject !== null) {
-      initalizeCardContainer();
-      wrapperSwitchModes(true);
-      let curr = currentProject.extractPriorityObject();
-      while (curr !== null) {
-        curr.print();
-        curr = currentProject.extractPriorityObject();
-      }
+      currentProject.print();
     }
   }
 
@@ -73,6 +76,8 @@ const run = () => {
       btn.classList.add("project-btn");
       btn.addEventListener("click", () => {
         currentProject = project;
+        initalizeCardContainer();
+        wrapperSwitchModes(true);
         printCurrentProject();
         printCurrentProjectHeader();
       });
@@ -178,10 +183,20 @@ const run = () => {
   const getColorInput = () => colorInput.value;
   const getPriorityInput = () => priorityInput.value;
 
-  createBtn.addEventListener("click", () => {
-    insertTodoIntoCurrentProject(new todoObj(getTitleInput(), getDescriptionInput(), getDateInput(), getPriorityInput(), getColorInput(), renderCardsModule(formatDistance)));
+  createBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    insertTodoIntoCurrentProject(
+      todoObj(
+        getTitleInput(),
+        getDescriptionInput(),
+        getDateInput(),
+        getPriorityInput(),
+        getColorInput(),
+        renderCardsModule(formatDistance, cardWrapper, printedObjs)
+      )
+    );
     printCurrentProject();
-  })
+  });
 
   initalizeCardContainer();
 };

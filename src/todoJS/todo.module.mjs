@@ -10,11 +10,11 @@ export default function (title, description, duedate, priority, color, printFun)
   }
 
   function hasExpiried() {
-    return new Date() >= duedate;
-  }
-
-  function print(){
-    printFun(title, description, duedate, priority, color);
+    if(typeof duedate === "string")
+    {
+      return new Date() >= new Date(duedate);  
+    }
+    return (new Date()) >= duedate;
   }
 
   return {
@@ -25,7 +25,7 @@ export default function (title, description, duedate, priority, color, printFun)
     priority,
     changeClr,
     getClr,
-    print,
-    dateOfCreation: new Date()
+    print: printFun,
+    dateOfCreation: new Date(),
   };
 }

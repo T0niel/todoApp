@@ -178,7 +178,6 @@ div.container,
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-areas: "nav cardContainer";
-  border-right: 5px solid var(--gold-clr);
 }
 
 .wrapper.block{
