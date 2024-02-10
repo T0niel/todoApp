@@ -76,9 +76,8 @@ const run = () => {
       let found = false;
 
       objLocal.forEach((obj, index) => {
-        for(let key in obj)
-        {
-          if(key === currentProject.name){
+        for (let key in obj) {
+          if (key === currentProject.name) {
             found = true;
             objLocal[index] = {
               name: currentProject.name,
@@ -86,30 +85,29 @@ const run = () => {
             };
           }
         }
-      })
-
-      if(!found) objLocal.push({
-        name: currentProject.name,
-        [currentProject.name]: currentProject.getObjects()
       });
+
+      if (!found)
+        objLocal.push({
+          name: currentProject.name,
+          [currentProject.name]: currentProject.getObjects(),
+        });
 
       localStorage.setItem("Projects", JSON.stringify(objLocal));
     }
   }
 
-  function getProjectsFromLocalStorage()
-  {
+  function getProjectsFromLocalStorage() {
     if (storageAvailable("localStorage")) {
       let localProjects = localStorage.getItem("Projects");
-      if(localProjects !== null)
-      {
+      if (localProjects !== null) {
         const objLocal = JSON.parse(localProjects);
         objLocal.forEach((obj) => {
           let objects = [];
 
           let localProj = project(obj.name, reset, objects);
 
-          obj[obj.name].forEach(todoObj => {
+          obj[obj.name].forEach((todoObj) => {
             objects.push(
               todoModule(
                 todoObj.title,
@@ -127,13 +125,12 @@ const run = () => {
                 todoObj.dateOfCreation
               )
             );
-          })
+          });
 
           localProj = project(obj.name, reset, objects);
 
           projects.push(localProj);
-
-        })
+        });
 
         printProjectsToDetails();
       }
@@ -239,8 +236,7 @@ const run = () => {
     });
   }
 
-  function removeHandeler(card)
-  {
+  function removeHandeler(card) {
     currentProject.removeObj(card.getAttribute("data-index"));
     cardWrapper.removeChild(card);
 
@@ -303,7 +299,11 @@ const run = () => {
     const mouseEvent = new MouseEvent("click");
     createTodoBtn.dispatchEvent(mouseEvent);
 
-    dateInput.value = obj.duedate.toISOString().split('.')[0];
+    if (typeof obj.duedate !== "string")
+      dateInput.value = obj.duedate.toISOString().split(".")[0];
+    else
+      dateInput.value = (new Date(obj.duedate)).toISOString().split(".")[0];
+
     colorInput.value = obj.color;
     priorityInput.value = obj.priority;
     titleInput.value = obj.title;

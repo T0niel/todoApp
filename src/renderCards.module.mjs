@@ -12,8 +12,14 @@ export default function (formatter, cardWrapper, project, editHandeler, removeHa
     heading.classList.add("title");
     heading.textContent = obj.title;
 
-    const paragraph = document.createElement("p");
-    paragraph.textContent = obj.description;
+    const div = document.createElement("div");
+    
+    let splited = obj.description.split(" ");
+    splited.forEach(content => {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = content;
+      div.appendChild(paragraph);
+    });
 
     const dueDate = document.createElement("p");
     dueDate.classList.add("due-date");
@@ -42,7 +48,7 @@ export default function (formatter, cardWrapper, project, editHandeler, removeHa
     btns.appendChild(removeBtn);
 
     card.appendChild(heading);
-    card.appendChild(paragraph);
+    card.appendChild(div);
     card.appendChild(creationDate);
     card.appendChild(dueDate);
     card.appendChild(priority);
