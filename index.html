@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="left-text">
+          <form action="#">
+              <label for="title">Title: </label>
+              <input type="text" id="title" placeholder="Title" minlength="3" required>
+              <label for="description">Description: </label>
+              <textarea id="description" placeholder="text" cols="30" rows="10" minlength="5" required></textarea>
+              <label for="date">Due date: </label>
+              <input type="datetime-local" id="date" required>
+              <label for="priority">Priority number: </label>
+              <input type="number" placeholder="Number" id="priority" value="0" min="0" max="50" required>
+              <label for="color">Color: </label>
+              <input type="color" id="color" value="#FFFFFF">
+            <button class="create-btn"" type="submit">Create</button>
+            <p class="invalid" style="display: none;">Invalid Form!</p>
+          </form>
+        </div>
+        <div class="close">&times;</div>
+    </div>
+    </div>
+    <div class="container">
+      <div class="wrapper grid">
+        <aside class="left-side">
+          <h1 class="projects-header">My Projects</h1>
+          <button class="create-project-btn">Create Project</button>
+          <ol class="project list">
+            <details class="detail today-projects">
+              <summary>Today</summary>
+            </details>
+            <details class="detail week-projects">
+              <summary>This week</summary>
+            </details>
+            <details class="detail month-projects">
+              <summary>This month</summary>
+            </details>
+            <details class="detail all-projects">
+              <summary>All projects</summary>
+            </details>
+          </ol>
+        </aside>
+        <div class="card-container">
+          <nav class="card-navigation">
+            <button class="new-todo-btn">+</button>
+            <h1 class="current-prj-header"></h1>
+          </nav>
+          <div class="card-wrapper"></div>
+        </div>
+      </div>
+    </div>
+  <script defer src="index.c8ef19b5fb5b6b3c5a65.js"></script></body>
+</html>
