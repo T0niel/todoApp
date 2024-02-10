@@ -4,6 +4,7 @@ const { formatDistance } = require("date-fns");
 
 import renderCardsModule from "./renderCards.module.mjs";
 import project from "./todoJS/project.module.mjs";
+import todoModule from "./todoJS/todo.module.mjs";
 import todoObj from "./todoJS/todo.module.mjs";
 
 const run = () => {
@@ -37,6 +38,106 @@ const run = () => {
   let currentProject = null;
   let editing = false;
   let editingObj = null;
+
+  function storageAvailable(type) {
+    let storage;
+    try {
+      storage = window[type];
+      const x = "__storage_test__";
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      return (
+        e instanceof DOMException &&
+        (e.code === 22 ||
+          // Firefox
+          e.code === 1014 ||
+          // test name field too, because code might not be present
+          e.name === "QuotaExceededError" ||
+          e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+        // acknowledge QuotaExceededError only if there's something already stored
+        storage &&
+        storage.length !== 0
+      );
+    }
+  }
+
+  function saveCurrentProjectToLocalStorage() {
+    if (storageAvailable("localStorage")) {
+      let localProjects = localStorage.getItem("Projects");
+      if (localProjects === null) {
+        localStorage.setItem("Projects", "[]");
+      }
+
+      localProjects = localStorage.getItem("Projects");
+
+      const objLocal = JSON.parse(localProjects);
+
+      let found = false;
+
+      objLocal.forEach((obj, index) => {
+        for(let key in obj)
+        {
+          if(key === currentProject.name){
+            found = true;
+            objLocal[index] = {
+              name: currentProject.name,
+              [currentProject.name]: currentProject.getObjects(),
+            };
+          }
+        }
+      })
+
+      if(!found) objLocal.push({
+        name: currentProject.name,
+        [currentProject.name]: currentProject.getObjects()
+      });
+
+      localStorage.setItem("Projects", JSON.stringify(objLocal));
+    }
+  }
+
+  function getProjectsFromLocalStorage()
+  {
+    if (storageAvailable("localStorage")) {
+      let localProjects = localStorage.getItem("Projects");
+      if(localProjects !== null)
+      {
+        const objLocal = JSON.parse(localProjects);
+        objLocal.forEach((obj) => {
+          let objects = [];
+
+          let localProj = project(obj.name, reset, objects);
+
+          obj[obj.name].forEach(todoObj => {
+            objects.push(
+              todoModule(
+                todoObj.title,
+                todoObj.description,
+                new Date(todoObj.duedate),
+                +todoObj.priority,
+                "White",
+                renderCardsModule(
+                  formatDistance,
+                  cardWrapper,
+                  localProj,
+                  editHandeler
+                )
+              )
+            );
+          })
+
+          localProj = project(obj.name, reset, objects);
+
+          projects.push(localProj);
+
+        })
+
+        printProjectsToDetails();
+      }
+    }
+  }
 
   /*If the first parameter is not defined then it will act as an toggeler*/
   function wrapperSwitchModes(toGrid) {
@@ -82,6 +183,8 @@ const run = () => {
         wrapperSwitchModes(true);
         printCurrentProject();
         printCurrentProjectHeader();
+        /*Save project to local storage*/
+        saveCurrentProjectToLocalStorage();
       });
       detailElement.appendChild(btn);
     }
@@ -232,12 +335,14 @@ const run = () => {
         )
       );
       printCurrentProject();
-    }else{
+      saveCurrentProjectToLocalStorage();
+    } else {
       document.querySelector(".invalid").style.display = "block";
     }
   });
 
   initalizeCardContainer();
+  getProjectsFromLocalStorage();
 };
 
 run();

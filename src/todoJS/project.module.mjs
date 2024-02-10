@@ -1,5 +1,8 @@
-export default function (name, reset = null, updateTimage = 1 * 60 * 1000) {
+export default function (name, reset = null, dataObjs = null, updateTimage = 1 * 60 * 1000) {
   let objs = [];
+
+  if(dataObjs !== null)
+    objs = dataObjs;
 
   function insert(obj) {
     objs.push(obj);
@@ -29,6 +32,11 @@ export default function (name, reset = null, updateTimage = 1 * 60 * 1000) {
     }
   }
 
+  function getObjects()
+  {
+    return objs;
+  }
+
   //Check for updates on time every 1 min
   setInterval(() => {
     print();
@@ -40,5 +48,6 @@ export default function (name, reset = null, updateTimage = 1 * 60 * 1000) {
     name,
     print,
     removeObj,
+    getObjects,
   };
 }

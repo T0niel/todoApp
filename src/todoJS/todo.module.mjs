@@ -27,5 +27,6 @@ export default function (title, description, duedate, priority, color, printFun)
     getClr,
     print: printFun,
     dateOfCreation: new Date(),
+    
   };
 }
