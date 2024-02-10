@@ -33,7 +33,6 @@ const run = () => {
   const monthPrinted = [];
   const allPrinted = [];
   const weekprinted = [];
-  const printedObjs = [];
 
   let currentProject = null;
   let editing = false;
