@@ -50,7 +50,7 @@ const run = () => {
     projects.push(new project(name, reset));
   }
 
-  function reset(){
+  function reset() {
     while (cardWrapper.firstChild) {
       cardWrapper.removeChild(cardWrapper.firstChild);
     }
@@ -173,8 +173,10 @@ const run = () => {
 
   createProjectBtn.addEventListener("click", () => {
     const name = prompt("Project name: ");
-    createProject(name);
-    printProjectsToDetails();
+    if (name.length > 3 && typeof name === "string") {
+      createProject(name);
+      printProjectsToDetails();
+    }
   });
 
   const getTitleInput = () => titleInput.value;

@@ -1,6 +1,5 @@
 export default function (formatter, cardWrapper) {
-  function fun(obj){
-
+  return (obj) => {
     const dueDateFormated = formatter(obj.duedate, new Date());
 
     const dateOfCreationFormated = formatter(obj.dateOfCreation, new Date());
@@ -51,6 +50,4 @@ export default function (formatter, cardWrapper) {
 
     cardWrapper.appendChild(card);
   }
-
-  return fun;
 }

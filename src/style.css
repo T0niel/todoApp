@@ -180,10 +180,8 @@ div.container,
   grid-template-areas: "nav cardContainer";
 }
 
-.wrapper.block{
+.wrapper.block {
   display: block;
-  height: fit-content;
-  border-right: none;
 }
 
 aside.left-side {
@@ -319,49 +317,107 @@ button {
   width: 80%;
 }
 
-textarea{
-    resize: none;
+textarea {
+  resize: none;
 }
 
-.modal-content{
-    display: flex;
+.modal-content {
+  display: flex;
 }
 
-div.close{
-    cursor: pointer;
-    margin-left: auto;
+div.close {
+  cursor: pointer;
+  margin-left: auto;
 }
 
-.modal-content *{
-    display: block;
-    margin: auto;
-    margin: 1rem;
+.modal-content * {
+  display: block;
+  margin: 1rem;
+  flex: 1;
 }
 
-.modal-content{
-    color: var(--second-text-clr);
+.modal-content .left-side {
+  margin-right: auto;
 }
 
-.close{
+.modal-content .close {
+  flex: 0 0 10px;
+}
+
+.modal-content {
+  color: var(--second-text-clr);
+}
+
+.close {
   font-size: 2rem;
 }
 
-.project-btn{
-  background-color: var(--main-text-clr);
-  color: white;
+.project-btn {
+  background-color: transparent;
+  color: var(--main-background-clr);
   border: none;
   padding: 1rem 2rem;
+  display: block;
+}
+
+textarea,
+input {
+  box-sizing: border-box;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+input[type="color"] {
+  width: 100px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* Hover effect */
+input:hover {
+  border-color: #666;
+}
+
+/* Focus effect */
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Placeholder color */
+::placeholder {
+  color: #aaa;
 }
 
 @media only screen and (max-width: 70rem) {
-  .wrapper {
+  .wrapper.grid {
     display: block;
   }
   div.container,
-  .wrapper {
+  .wrapper.grid {
     height: fit-content;
   }
   aside.left-side {
     border: none;
+  }
+  .modal-content {
+    width: 100%;
+    height: 100%;
+  }
+  div.modal-content,
+  .modal-content form {
+    padding: 0;
+    margin: 0;
+  }
+  textarea,
+  input {
+    width: 80vw;
   }
 }
