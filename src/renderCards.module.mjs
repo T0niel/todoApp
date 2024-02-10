@@ -14,7 +14,7 @@ export default function (formatter, cardWrapper, project, editHandeler, removeHa
 
     const div = document.createElement("div");
     
-    let splited = obj.description.split(" ");
+    let splited = obj.description.split("\n");
     splited.forEach(content => {
       const paragraph = document.createElement("p");
       paragraph.textContent = content;

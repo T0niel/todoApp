@@ -11,9 +11,9 @@ export default function (
 
   function hasExpiried() {
     if (typeof duedate === "string") {
-      return new Date() >= new Date(duedate);
+      return new Date() > new Date(duedate);
     }
-    return new Date() >= duedate;
+    return new Date() > duedate;
   }
 
   if (dateOfCreation === null) {

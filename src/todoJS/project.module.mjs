@@ -1,11 +1,24 @@
-export default function (name, reset = null, dataObjs = null, updateTimage = 1 * 60 * 1000) {
+export default function (
+  name,
+  reset = null,
+  dataObjs = null,
+  updateTimage = 1 * 60 * 1000
+) {
   let objs = [];
+  let printing = true;
 
-  if(dataObjs !== null)
-    objs = dataObjs;
+  if (dataObjs !== null) objs = dataObjs;
 
   function insert(obj) {
     objs.push(obj);
+  }
+
+  function stopPrinting() {
+    printing = false;
+  }
+
+  function startPrinting() {
+    printing = true;
   }
 
   function print() {
@@ -26,20 +39,20 @@ export default function (name, reset = null, dataObjs = null, updateTimage = 1 *
 
   function removeObj(index, obj = null) {
     if (obj !== null) {
-      objs = objs.filter((cObj) => obj !== cObj)
+      objs = objs.filter((cObj) => obj !== cObj);
     } else {
       objs = objs.filter((obj, objIndex) => +index !== objIndex);
     }
   }
 
-  function getObjects()
-  {
+  function getObjects() {
     return objs;
   }
 
   //Check for updates on time every 1 min
   setInterval(() => {
-    print();
+    if(printing)
+      print();
   }, updateTimage);
 
   return {
@@ -49,5 +62,7 @@ export default function (name, reset = null, dataObjs = null, updateTimage = 1 *
     print,
     removeObj,
     getObjects,
+    startPrinting,
+    stopPrinting
   };
 }

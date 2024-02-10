@@ -179,6 +179,13 @@ const run = () => {
       btn.classList.add("project-btn");
       btn.addEventListener("click", () => {
         currentProject = project;
+        
+        projects.forEach(project => {
+          project.stopPrinting();
+        })
+
+        currentProject.startPrinting();
+
         initalizeCardContainer();
         wrapperSwitchModes(true);
         printCurrentProject();
@@ -299,11 +306,13 @@ const run = () => {
     const mouseEvent = new MouseEvent("click");
     createTodoBtn.dispatchEvent(mouseEvent);
 
+    console.log("Object date: ");
+    console.log(obj.duedate);
     if (typeof obj.duedate !== "string")
       dateInput.value = obj.duedate.toISOString().split(".")[0];
     else
       dateInput.value = (new Date(obj.duedate)).toISOString().split(".")[0];
-
+    
     colorInput.value = obj.color;
     priorityInput.value = obj.priority;
     titleInput.value = obj.title;
