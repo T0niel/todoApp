@@ -1,4 +1,4 @@
-export default function (formatter, cardWrapper, project, editHandeler) {
+export default function (formatter, cardWrapper, project, editHandeler, removeHandeler) {
   return (obj, index) => {
     const dueDateFormated = formatter(obj.duedate, new Date());
 
@@ -6,7 +6,7 @@ export default function (formatter, cardWrapper, project, editHandeler) {
 
     const card = document.createElement("div");
     card.classList.add("card");
-    card.style.backgroundColor = obj.getClr();
+    card.style.backgroundColor = obj.color;
 
     const heading = document.createElement("h1");
     heading.classList.add("title");
@@ -54,8 +54,7 @@ export default function (formatter, cardWrapper, project, editHandeler) {
     })
 
     removeBtn.addEventListener("click", () => {
-      project.removeObj(card.getAttribute("data-index"));
-      cardWrapper.removeChild(card);
+      removeHandeler(card);
     });
 
     cardWrapper.appendChild(card);

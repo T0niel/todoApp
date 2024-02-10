@@ -5,7 +5,6 @@ const { formatDistance } = require("date-fns");
 import renderCardsModule from "./renderCards.module.mjs";
 import project from "./todoJS/project.module.mjs";
 import todoModule from "./todoJS/todo.module.mjs";
-import todoObj from "./todoJS/todo.module.mjs";
 
 const run = () => {
   const createTodoBtn = document.querySelector(".new-todo-btn");
@@ -117,13 +116,15 @@ const run = () => {
                 todoObj.description,
                 new Date(todoObj.duedate),
                 +todoObj.priority,
-                "White",
+                todoObj.color,
                 renderCardsModule(
                   formatDistance,
                   cardWrapper,
                   localProj,
-                  editHandeler
-                )
+                  editHandeler,
+                  removeHandeler
+                ),
+                todoObj.dateOfCreation
               )
             );
           })
@@ -157,6 +158,8 @@ const run = () => {
     while (cardWrapper.firstChild) {
       cardWrapper.removeChild(cardWrapper.firstChild);
     }
+
+    saveCurrentProjectToLocalStorage();
   }
 
   function printCurrentProject() {
@@ -236,6 +239,14 @@ const run = () => {
     });
   }
 
+  function removeHandeler(card)
+  {
+    currentProject.removeObj(card.getAttribute("data-index"));
+    cardWrapper.removeChild(card);
+
+    saveCurrentProjectToLocalStorage();
+  }
+
   function printAllProjects() {
     projects.forEach((project) => {
       if (!allPrinted.includes(project)) {
@@ -292,8 +303,8 @@ const run = () => {
     const mouseEvent = new MouseEvent("click");
     createTodoBtn.dispatchEvent(mouseEvent);
 
-    dateInput.value = obj.duedate;
-    colorInput.value = obj.getClr();
+    dateInput.value = obj.duedate.toISOString().split('.')[0];
+    colorInput.value = obj.color;
     priorityInput.value = obj.priority;
     titleInput.value = obj.title;
     descriptionInput.value = obj.description;
@@ -320,7 +331,7 @@ const run = () => {
         createBtn.textContent = "Create";
       }
       insertTodoIntoCurrentProject(
-        todoObj(
+        todoModule(
           getTitleInput(),
           getDescriptionInput(),
           getDateInput(),
@@ -330,7 +341,8 @@ const run = () => {
             formatDistance,
             cardWrapper,
             currentProject,
-            editHandeler
+            editHandeler,
+            removeHandeler
           )
         )
       );
