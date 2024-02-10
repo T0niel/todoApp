@@ -12,7 +12,7 @@ const run = () => {
   const close = document.querySelector(".close");
   const createBtn = document.querySelector(".create-btn");
   const titleInput = document.querySelector("input#title");
-  const descriptionInput = document.querySelector("input#title");
+  const descriptionInput = document.querySelector("textarea");
   const dateInput = document.querySelector("input#date");
   const colorInput = document.querySelector("input#color");
   const priorityInput = document.querySelector("input#priority");
@@ -25,6 +25,7 @@ const run = () => {
   const allProjects = document.querySelector("details.all-projects");
   const createProjectBtn = document.querySelector(".create-project-btn");
   const currentProjectHeader = document.querySelector(".current-prj-header");
+  const from = document.querySelector("form");
 
   const projects = [];
 
@@ -35,6 +36,8 @@ const run = () => {
   const printedObjs = [];
 
   let currentProject = null;
+  let editing = false;
+  let editingObj = null;
 
   /*If the first parameter is not defined then it will act as an toggeler*/
   function wrapperSwitchModes(toGrid) {
@@ -176,8 +179,27 @@ const run = () => {
     if (name.length > 3 && typeof name === "string") {
       createProject(name);
       printProjectsToDetails();
+    } else {
+      alert(
+        "Not an valid project name (must be an string with more that 3 characters)"
+      );
     }
   });
+
+  function editHandeler(obj) {
+    const mouseEvent = new MouseEvent("click");
+    createTodoBtn.dispatchEvent(mouseEvent);
+
+    dateInput.value = obj.duedate;
+    colorInput.value = obj.getClr();
+    priorityInput.value = obj.priority;
+    titleInput.value = obj.title;
+    descriptionInput.value = obj.description;
+
+    editing = true;
+    editingObj = obj;
+    createBtn.textContent = "Edit";
+  }
 
   const getTitleInput = () => titleInput.value;
   const getDescriptionInput = () => descriptionInput.value;
@@ -187,17 +209,33 @@ const run = () => {
 
   createBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    insertTodoIntoCurrentProject(
-      todoObj(
-        getTitleInput(),
-        getDescriptionInput(),
-        getDateInput(),
-        getPriorityInput(),
-        getColorInput(),
-        renderCardsModule(formatDistance, cardWrapper, printedObjs)
-      )
-    );
-    printCurrentProject();
+    if (from.checkValidity()) {
+      if (editing && editingObj !== null) {
+        currentProject.removeObj(null, editingObj);
+
+        editing = false;
+        editingObj = null;
+        createBtn.textContent = "Create";
+      }
+      insertTodoIntoCurrentProject(
+        todoObj(
+          getTitleInput(),
+          getDescriptionInput(),
+          getDateInput(),
+          getPriorityInput(),
+          getColorInput(),
+          renderCardsModule(
+            formatDistance,
+            cardWrapper,
+            currentProject,
+            editHandeler
+          )
+        )
+      );
+      printCurrentProject();
+    }else{
+      document.querySelector(".invalid").style.display = "block";
+    }
   });
 
   initalizeCardContainer();

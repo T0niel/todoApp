@@ -1,5 +1,5 @@
-export default function (formatter, cardWrapper) {
-  return (obj) => {
+export default function (formatter, cardWrapper, project, editHandeler) {
+  return (obj, index) => {
     const dueDateFormated = formatter(obj.duedate, new Date());
 
     const dateOfCreationFormated = formatter(obj.dateOfCreation, new Date());
@@ -17,7 +17,7 @@ export default function (formatter, cardWrapper) {
 
     const dueDate = document.createElement("p");
     dueDate.classList.add("due-date");
-    dueDate.textContent = "Available until: " + dueDateFormated;
+    dueDate.textContent = "Available for: " + dueDateFormated;
 
     const creationDate = document.createElement("p");
     creationDate.classList.add("creation-date");
@@ -47,6 +47,16 @@ export default function (formatter, cardWrapper) {
     card.appendChild(dueDate);
     card.appendChild(priority);
     card.appendChild(btns);
+    card.setAttribute("data-index", index);
+
+    editBtn.addEventListener("click", () => {
+      editHandeler(obj);
+    })
+
+    removeBtn.addEventListener("click", () => {
+      project.removeObj(card.getAttribute("data-index"));
+      cardWrapper.removeChild(card);
+    });
 
     cardWrapper.appendChild(card);
   }

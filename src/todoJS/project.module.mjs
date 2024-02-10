@@ -1,4 +1,3 @@
-
 export default function (name, reset = null, updateTimage = 1 * 60 * 1000) {
   let objs = [];
 
@@ -7,17 +6,27 @@ export default function (name, reset = null, updateTimage = 1 * 60 * 1000) {
   }
 
   function print() {
-    objs = objs.filter(obj => !obj.hasExpiried());
+    objs = objs.filter((obj) => !obj.hasExpiried());
 
-    objs.sort((objA, objB) => objA.priority > objB.priority ? -1 : 1);
-    reset();
+    objs.sort((objA, objB) => (objA.priority > objB.priority ? -1 : 1));
+    if (reset != null) {
+      reset();
+    }
     printObjs();
   }
 
-  function printObjs(){
-    objs.forEach(obj => {
-      obj.print(obj);
-    })
+  function printObjs() {
+    objs.forEach((obj, index) => {
+      obj.print(obj, index);
+    });
+  }
+
+  function removeObj(index, obj = null) {
+    if (obj !== null) {
+      objs = objs.filter((cObj) => obj !== cObj)
+    } else {
+      objs = objs.filter((obj, objIndex) => +index !== objIndex);
+    }
   }
 
   //Check for updates on time every 1 min
@@ -30,5 +39,6 @@ export default function (name, reset = null, updateTimage = 1 * 60 * 1000) {
     creationDate: new Date(),
     name,
     print,
+    removeObj,
   };
 }

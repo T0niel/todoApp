@@ -9,7 +9,7 @@
     <div class="modal" style="display: none;">
       <div class="modal-content">
         <div class="left-text">
-            <form>
+          <form action="#">
               <label for="title">Title: </label>
               <input type="text" id="title" placeholder="Title" minlength="3" required>
               <label for="description">Description: </label>
@@ -19,9 +19,10 @@
               <label for="priority">Priority number: </label>
               <input type="number" placeholder="Number" id="priority" value="0" min="0" max="50" required>
               <label for="color">Color: </label>
-              <input type="color" id="color">
+              <input type="color" id="color" value="#c9ada7">
             <button class="create-btn"" type="submit">Create</button>
-            </form>
+            <p class="invalid" style="display: none;">Invalid Form!</p>
+          </form>
         </div>
         <div class="close">&times;</div>
     </div>

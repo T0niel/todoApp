@@ -148,6 +148,7 @@ table {
   --secondary-background-clr: #cfdbd5;
   --agree-clr: #50c878;
   --agree-clr-hover: #1e9f49;
+  --danger-clr: #e03e39;
 }
 
 body {
@@ -273,13 +274,13 @@ button {
 }
 
 .remove-btn {
-  background-color: #e03e39;
+  background-color: var(--danger-clr);
   color: white;
   border: none;
 }
 
 .remove-btn:hover {
-  background-color: #e3504b;
+  background-color: var(--danger-clr);
 }
 
 .create-btn:hover,
@@ -394,6 +395,11 @@ input:focus {
 /* Placeholder color */
 ::placeholder {
   color: #aaa;
+}
+
+.invalid{
+  margin: auto;
+  color: var(--danger-clr);
 }
 
 @media only screen and (max-width: 70rem) {
