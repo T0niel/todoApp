@@ -184,6 +184,7 @@ table {
   --agree-clr: #50c878;
   --agree-clr-hover: #1e9f49;
   --danger-clr: #e03e39;
+  --hot-danger-clr: #f92b24;
 }
 
 body {
@@ -255,13 +256,19 @@ button {
 }
 
 .create-btn,
-.create-project-btn,
-.new-todo-btn {
+.create-project-btn{
   background-color: var(--agree-clr);
   border: none;
   color: white;
   padding: 0.6rem 1rem;
   display: inline-block;
+}
+
+.new-todo-btn{
+  background-color: var(--agree-clr);
+  color: white;
+  width: 40px;
+  height: 40px;
 }
 
 .create-project-btn {
@@ -279,9 +286,14 @@ button {
 
 .card {
   padding: 1rem;
-  box-shadow: 0px 0px 50px var(--secondary-background-clr);
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.026);
   overflow-x: auto;
   height: 100%;
+}
+
+.card:hover{
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.104);
+  transition: 2s ease-in-out;
 }
 
 .card .title {
@@ -295,6 +307,7 @@ button {
   font-family: robotoBold, roboto, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
+  font-weight: bold;
 }
 
 .card .btns {
@@ -317,7 +330,7 @@ button {
 }
 
 .remove-btn:hover {
-  background-color: var(--danger-clr);
+  background-color: var(--hot-danger-clr);
 }
 
 .create-btn:hover,
@@ -353,6 +366,7 @@ button {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  border-radius: 1rem;
 }
 
 textarea {
@@ -408,6 +422,12 @@ input {
   margin-bottom: 15px;
   transition: border-color 0.3s ease;
   width: 100%;
+  border-left: 5px solid var(--agree-clr);
+}
+
+textarea:invalid,
+input:invalid{
+  border-left: 5px solid var(--danger-clr);
 }
 
 input[type="color"] {
@@ -439,6 +459,11 @@ input:focus {
   color: var(--danger-clr);
 }
 
+button{
+  border-radius: .2rem;
+  border: none;
+}
+
 @media only screen and (max-width: 70rem) {
   .wrapper.grid {
     display: block;
@@ -457,14 +482,15 @@ input:focus {
   div.modal-content,
   .modal-content form {
     padding: 0;
-    margin: 0;
+    margin: 0;  
+    border-radius: 0;
   }
   textarea,
   input {
     width: 80vw;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["/*--THE MAYER RESET--*/\r\n/* http://meyerweb.com/eric/tools/css/reset/ \r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\r\n\r\nhtml,\r\nbody,\r\ndiv,\r\nspan,\r\napplet,\r\nobject,\r\niframe,\r\nh1,\r\nh2,\r\nh3,\r\nh4,\r\nh5,\r\nh6,\r\np,\r\nblockquote,\r\npre,\r\na,\r\nabbr,\r\nacronym,\r\naddress,\r\nbig,\r\ncite,\r\ncode,\r\ndel,\r\ndfn,\r\nem,\r\nimg,\r\nins,\r\nkbd,\r\nq,\r\ns,\r\nsamp,\r\nsmall,\r\nstrike,\r\nstrong,\r\nsub,\r\nsup,\r\ntt,\r\nvar,\r\nb,\r\nu,\r\ni,\r\ncenter,\r\ndl,\r\ndt,\r\ndd,\r\nol,\r\nul,\r\nli,\r\nfieldset,\r\nform,\r\nlabel,\r\nlegend,\r\ntable,\r\ncaption,\r\ntbody,\r\ntfoot,\r\nthead,\r\ntr,\r\nth,\r\ntd,\r\narticle,\r\naside,\r\ncanvas,\r\ndetails,\r\nembed,\r\nfigure,\r\nfigcaption,\r\nfooter,\r\nheader,\r\nhgroup,\r\nmenu,\r\nnav,\r\noutput,\r\nruby,\r\nsection,\r\nsummary,\r\ntime,\r\nmark,\r\naudio,\r\nvideo {\r\n  margin: 0;\r\n  padding: 0;\r\n  border: 0;\r\n  font-size: 100%;\r\n  font: inherit;\r\n  vertical-align: baseline;\r\n}\r\n/* HTML5 display-role reset for older browsers */\r\narticle,\r\naside,\r\ndetails,\r\nfigcaption,\r\nfigure,\r\nfooter,\r\nheader,\r\nhgroup,\r\nmenu,\r\nnav,\r\nsection {\r\n  display: block;\r\n}\r\nbody {\r\n  line-height: 1;\r\n}\r\nol,\r\nul {\r\n  list-style: none;\r\n}\r\nblockquote,\r\nq {\r\n  quotes: none;\r\n}\r\nblockquote:before,\r\nblockquote:after,\r\nq:before,\r\nq:after {\r\n  content: \"\";\r\n  content: none;\r\n}\r\ntable {\r\n  border-collapse: collapse;\r\n  border-spacing: 0;\r\n}\r\n\r\n/*End of the mayer reset*/\r\n\r\n* {\r\n  box-sizing: border-box;\r\n}\r\n\r\n@font-face {\r\n  font-family: roboto;\r\n  src: url(\"./fonts/Roboto-Regular.ttf\");\r\n}\r\n\r\n@font-face {\r\n  font-family: robotBold;\r\n  src: url(\"./fonts/Roboto-Bold.ttf\");\r\n}\r\n\r\n:root.light {\r\n  --main-text-clr: #242423;\r\n  --second-text-clr: #4d524d;\r\n  --gold-clr: #f5cb5c;\r\n  --main-background-clr: #e8eddf;\r\n  --secondary-background-clr: #cfdbd5;\r\n  --agree-clr: #50c878;\r\n  --agree-clr-hover: #1e9f49;\r\n  --danger-clr: #e03e39;\r\n}\r\n\r\nbody {\r\n  margin: 0;\r\n  background-color: var(--main-background-clr);\r\n  font-family: roboto, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\",\r\n    Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n}\r\n\r\ndiv.container,\r\n.wrapper {\r\n  height: 100vh;\r\n}\r\n\r\n.card-container {\r\n  overflow-y: scroll;\r\n}\r\n\r\n.primary-clr {\r\n  color: var(--main-text-clr);\r\n}\r\n\r\n.secondary-clr {\r\n  color: var(--second-text-clr);\r\n}\r\n\r\n.wrapper.grid {\r\n  display: grid;\r\n  grid-template-columns: 20% 80%;\r\n  grid-template-areas: \"nav cardContainer\";\r\n}\r\n\r\n.wrapper.block {\r\n  display: block;\r\n}\r\n\r\naside.left-side {\r\n  padding: 1rem;\r\n  background-color: var(--second-text-clr);\r\n  color: var(--secondary-background-clr);\r\n  height: 100%;\r\n  grid-area: nav;\r\n}\r\n\r\n.detail {\r\n  margin: 1rem;\r\n  cursor: pointer;\r\n  user-select: none;\r\n}\r\n\r\n.projects-header {\r\n  text-align: center;\r\n}\r\n\r\n.card-container {\r\n  grid-area: cardContainer;\r\n}\r\n\r\n.card-navigation {\r\n  padding: 1rem;\r\n  width: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  cursor: pointer;\r\n}\r\n\r\n.create-btn,\r\n.create-project-btn,\r\n.new-todo-btn {\r\n  background-color: var(--agree-clr);\r\n  border: none;\r\n  color: white;\r\n  padding: 0.6rem 1rem;\r\n  display: inline-block;\r\n}\r\n\r\n.create-project-btn {\r\n  display: block;\r\n  margin: 1rem auto;\r\n}\r\n\r\n.card-wrapper {\r\n  display: grid;\r\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\r\n  grid-auto-rows: 250px;\r\n  padding: 1rem;\r\n  gap: 1rem;\r\n}\r\n\r\n.card {\r\n  padding: 1rem;\r\n  box-shadow: 0px 0px 50px var(--secondary-background-clr);\r\n  overflow-x: auto;\r\n  height: 100%;\r\n}\r\n\r\n.card .title {\r\n  color: var(--gold-clr);\r\n  margin-bottom: 1rem;\r\n  font-size: 2rem;\r\n}\r\n\r\n.current-prj-header {\r\n  color: var(--main-text-clr);\r\n  font-family: robotoBold, roboto, system-ui, -apple-system, BlinkMacSystemFont,\r\n    \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\",\r\n    sans-serif;\r\n}\r\n\r\n.card .btns {\r\n  display: flex;\r\n  margin: auto;\r\n  width: 50%;\r\n  margin-top: 1rem;\r\n  gap: 1rem;\r\n}\r\n\r\n.card .btns > * {\r\n  flex: 1;\r\n  padding: 0.4rem;\r\n}\r\n\r\n.remove-btn {\r\n  background-color: var(--danger-clr);\r\n  color: white;\r\n  border: none;\r\n}\r\n\r\n.remove-btn:hover {\r\n  background-color: var(--danger-clr);\r\n}\r\n\r\n.create-btn:hover,\r\n.new-todo-btn:hover,\r\n.create-project-btn:hover {\r\n  background-color: var(--agree-clr-hover);\r\n}\r\n\r\n.card .creation-date,\r\n.card .due-date,\r\n.card .priority {\r\n  margin-top: 0.5rem;\r\n  color: var(--second-text-clr);\r\n}\r\n\r\n.modal {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  position: absolute;\r\n  z-index: 1;\r\n  left: 0;\r\n  top: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  overflow: auto;\r\n  background-color: rgb(0, 0, 0);\r\n  background-color: rgba(0, 0, 0, 0.4);\r\n}\r\n\r\n.modal-content {\r\n  background-color: #fefefe;\r\n  padding: 20px;\r\n  border: 1px solid #888;\r\n  width: 80%;\r\n}\r\n\r\ntextarea {\r\n  resize: none;\r\n}\r\n\r\n.modal-content {\r\n  display: flex;\r\n}\r\n\r\ndiv.close {\r\n  cursor: pointer;\r\n  margin-left: auto;\r\n}\r\n\r\n.modal-content * {\r\n  display: block;\r\n  margin: 1rem;\r\n  flex: 1;\r\n}\r\n\r\n.modal-content .left-side {\r\n  margin-right: auto;\r\n}\r\n\r\n.modal-content .close {\r\n  flex: 0 0 10px;\r\n}\r\n\r\n.modal-content {\r\n  color: var(--second-text-clr);\r\n}\r\n\r\n.close {\r\n  font-size: 2rem;\r\n}\r\n\r\n.project-btn {\r\n  background-color: transparent;\r\n  color: var(--main-background-clr);\r\n  border: none;\r\n  padding: 1rem 2rem;\r\n  display: block;\r\n}\r\n\r\ntextarea,\r\ninput {\r\n  box-sizing: border-box;\r\n  padding: 10px;\r\n  border: 2px solid #ccc;\r\n  border-radius: 5px;\r\n  font-size: 16px;\r\n  margin-bottom: 15px;\r\n  transition: border-color 0.3s ease;\r\n  width: 100%;\r\n}\r\n\r\ninput[type=\"color\"] {\r\n  width: 100px;\r\n  height: 50px;\r\n  padding: 0;\r\n  border: none;\r\n  cursor: pointer;\r\n}\r\n\r\n/* Hover effect */\r\ninput:hover {\r\n  border-color: #666;\r\n}\r\n\r\n/* Focus effect */\r\ninput:focus {\r\n  border-color: #007bff;\r\n  outline: none;\r\n}\r\n\r\n/* Placeholder color */\r\n::placeholder {\r\n  color: #aaa;\r\n}\r\n\r\n.invalid {\r\n  margin: auto;\r\n  color: var(--danger-clr);\r\n}\r\n\r\n@media only screen and (max-width: 70rem) {\r\n  .wrapper.grid {\r\n    display: block;\r\n  }\r\n  div.container,\r\n  .wrapper.grid {\r\n    height: fit-content;\r\n  }\r\n  aside.left-side {\r\n    border: none;\r\n  }\r\n  .modal-content {\r\n    width: 100%;\r\n    height: 100%;\r\n  }\r\n  div.modal-content,\r\n  .modal-content form {\r\n    padding: 0;\r\n    margin: 0;\r\n  }\r\n  textarea,\r\n  input {\r\n    width: 80vw;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["/*--THE MAYER RESET--*/\r\n/* http://meyerweb.com/eric/tools/css/reset/ \r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\r\n\r\nhtml,\r\nbody,\r\ndiv,\r\nspan,\r\napplet,\r\nobject,\r\niframe,\r\nh1,\r\nh2,\r\nh3,\r\nh4,\r\nh5,\r\nh6,\r\np,\r\nblockquote,\r\npre,\r\na,\r\nabbr,\r\nacronym,\r\naddress,\r\nbig,\r\ncite,\r\ncode,\r\ndel,\r\ndfn,\r\nem,\r\nimg,\r\nins,\r\nkbd,\r\nq,\r\ns,\r\nsamp,\r\nsmall,\r\nstrike,\r\nstrong,\r\nsub,\r\nsup,\r\ntt,\r\nvar,\r\nb,\r\nu,\r\ni,\r\ncenter,\r\ndl,\r\ndt,\r\ndd,\r\nol,\r\nul,\r\nli,\r\nfieldset,\r\nform,\r\nlabel,\r\nlegend,\r\ntable,\r\ncaption,\r\ntbody,\r\ntfoot,\r\nthead,\r\ntr,\r\nth,\r\ntd,\r\narticle,\r\naside,\r\ncanvas,\r\ndetails,\r\nembed,\r\nfigure,\r\nfigcaption,\r\nfooter,\r\nheader,\r\nhgroup,\r\nmenu,\r\nnav,\r\noutput,\r\nruby,\r\nsection,\r\nsummary,\r\ntime,\r\nmark,\r\naudio,\r\nvideo {\r\n  margin: 0;\r\n  padding: 0;\r\n  border: 0;\r\n  font-size: 100%;\r\n  font: inherit;\r\n  vertical-align: baseline;\r\n}\r\n/* HTML5 display-role reset for older browsers */\r\narticle,\r\naside,\r\ndetails,\r\nfigcaption,\r\nfigure,\r\nfooter,\r\nheader,\r\nhgroup,\r\nmenu,\r\nnav,\r\nsection {\r\n  display: block;\r\n}\r\nbody {\r\n  line-height: 1;\r\n}\r\nol,\r\nul {\r\n  list-style: none;\r\n}\r\nblockquote,\r\nq {\r\n  quotes: none;\r\n}\r\nblockquote:before,\r\nblockquote:after,\r\nq:before,\r\nq:after {\r\n  content: \"\";\r\n  content: none;\r\n}\r\ntable {\r\n  border-collapse: collapse;\r\n  border-spacing: 0;\r\n}\r\n\r\n/*End of the mayer reset*/\r\n\r\n* {\r\n  box-sizing: border-box;\r\n}\r\n\r\n@font-face {\r\n  font-family: roboto;\r\n  src: url(\"./fonts/Roboto-Regular.ttf\");\r\n}\r\n\r\n@font-face {\r\n  font-family: robotBold;\r\n  src: url(\"./fonts/Roboto-Bold.ttf\");\r\n}\r\n\r\n:root.light {\r\n  --main-text-clr: #242423;\r\n  --second-text-clr: #4d524d;\r\n  --gold-clr: #f5cb5c;\r\n  --main-background-clr: #e8eddf;\r\n  --secondary-background-clr: #cfdbd5;\r\n  --agree-clr: #50c878;\r\n  --agree-clr-hover: #1e9f49;\r\n  --danger-clr: #e03e39;\r\n  --hot-danger-clr: #f92b24;\r\n}\r\n\r\nbody {\r\n  margin: 0;\r\n  background-color: var(--main-background-clr);\r\n  font-family: roboto, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\",\r\n    Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n}\r\n\r\ndiv.container,\r\n.wrapper {\r\n  height: 100vh;\r\n}\r\n\r\n.card-container {\r\n  overflow-y: scroll;\r\n}\r\n\r\n.primary-clr {\r\n  color: var(--main-text-clr);\r\n}\r\n\r\n.secondary-clr {\r\n  color: var(--second-text-clr);\r\n}\r\n\r\n.wrapper.grid {\r\n  display: grid;\r\n  grid-template-columns: 20% 80%;\r\n  grid-template-areas: \"nav cardContainer\";\r\n}\r\n\r\n.wrapper.block {\r\n  display: block;\r\n}\r\n\r\naside.left-side {\r\n  padding: 1rem;\r\n  background-color: var(--second-text-clr);\r\n  color: var(--secondary-background-clr);\r\n  height: 100%;\r\n  grid-area: nav;\r\n}\r\n\r\n.detail {\r\n  margin: 1rem;\r\n  cursor: pointer;\r\n  user-select: none;\r\n}\r\n\r\n.projects-header {\r\n  text-align: center;\r\n}\r\n\r\n.card-container {\r\n  grid-area: cardContainer;\r\n}\r\n\r\n.card-navigation {\r\n  padding: 1rem;\r\n  width: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  cursor: pointer;\r\n}\r\n\r\n.create-btn,\r\n.create-project-btn{\r\n  background-color: var(--agree-clr);\r\n  border: none;\r\n  color: white;\r\n  padding: 0.6rem 1rem;\r\n  display: inline-block;\r\n}\r\n\r\n.new-todo-btn{\r\n  background-color: var(--agree-clr);\r\n  color: white;\r\n  width: 40px;\r\n  height: 40px;\r\n}\r\n\r\n.create-project-btn {\r\n  display: block;\r\n  margin: 1rem auto;\r\n}\r\n\r\n.card-wrapper {\r\n  display: grid;\r\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\r\n  grid-auto-rows: 250px;\r\n  padding: 1rem;\r\n  gap: 1rem;\r\n}\r\n\r\n.card {\r\n  padding: 1rem;\r\n  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.026);\r\n  overflow-x: auto;\r\n  height: 100%;\r\n}\r\n\r\n.card:hover{\r\n  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.104);\r\n  transition: 2s ease-in-out;\r\n}\r\n\r\n.card .title {\r\n  color: var(--gold-clr);\r\n  margin-bottom: 1rem;\r\n  font-size: 2rem;\r\n}\r\n\r\n.current-prj-header {\r\n  color: var(--main-text-clr);\r\n  font-family: robotoBold, roboto, system-ui, -apple-system, BlinkMacSystemFont,\r\n    \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\",\r\n    sans-serif;\r\n  font-weight: bold;\r\n}\r\n\r\n.card .btns {\r\n  display: flex;\r\n  margin: auto;\r\n  width: 50%;\r\n  margin-top: 1rem;\r\n  gap: 1rem;\r\n}\r\n\r\n.card .btns > * {\r\n  flex: 1;\r\n  padding: 0.4rem;\r\n}\r\n\r\n.remove-btn {\r\n  background-color: var(--danger-clr);\r\n  color: white;\r\n  border: none;\r\n}\r\n\r\n.remove-btn:hover {\r\n  background-color: var(--hot-danger-clr);\r\n}\r\n\r\n.create-btn:hover,\r\n.new-todo-btn:hover,\r\n.create-project-btn:hover {\r\n  background-color: var(--agree-clr-hover);\r\n}\r\n\r\n.card .creation-date,\r\n.card .due-date,\r\n.card .priority {\r\n  margin-top: 0.5rem;\r\n  color: var(--second-text-clr);\r\n}\r\n\r\n.modal {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  position: absolute;\r\n  z-index: 1;\r\n  left: 0;\r\n  top: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  overflow: auto;\r\n  background-color: rgb(0, 0, 0);\r\n  background-color: rgba(0, 0, 0, 0.4);\r\n}\r\n\r\n.modal-content {\r\n  background-color: #fefefe;\r\n  padding: 20px;\r\n  border: 1px solid #888;\r\n  width: 80%;\r\n  border-radius: 1rem;\r\n}\r\n\r\ntextarea {\r\n  resize: none;\r\n}\r\n\r\n.modal-content {\r\n  display: flex;\r\n}\r\n\r\ndiv.close {\r\n  cursor: pointer;\r\n  margin-left: auto;\r\n}\r\n\r\n.modal-content * {\r\n  display: block;\r\n  margin: 1rem;\r\n  flex: 1;\r\n}\r\n\r\n.modal-content .left-side {\r\n  margin-right: auto;\r\n}\r\n\r\n.modal-content .close {\r\n  flex: 0 0 10px;\r\n}\r\n\r\n.modal-content {\r\n  color: var(--second-text-clr);\r\n}\r\n\r\n.close {\r\n  font-size: 2rem;\r\n}\r\n\r\n.project-btn {\r\n  background-color: transparent;\r\n  color: var(--main-background-clr);\r\n  border: none;\r\n  padding: 1rem 2rem;\r\n  display: block;\r\n}\r\n\r\ntextarea,\r\ninput {\r\n  box-sizing: border-box;\r\n  padding: 10px;\r\n  border: 2px solid #ccc;\r\n  border-radius: 5px;\r\n  font-size: 16px;\r\n  margin-bottom: 15px;\r\n  transition: border-color 0.3s ease;\r\n  width: 100%;\r\n  border-left: 5px solid var(--agree-clr);\r\n}\r\n\r\ntextarea:invalid,\r\ninput:invalid{\r\n  border-left: 5px solid var(--danger-clr);\r\n}\r\n\r\ninput[type=\"color\"] {\r\n  width: 100px;\r\n  height: 50px;\r\n  padding: 0;\r\n  border: none;\r\n  cursor: pointer;\r\n}\r\n\r\n/* Hover effect */\r\ninput:hover {\r\n  border-color: #666;\r\n}\r\n\r\n/* Focus effect */\r\ninput:focus {\r\n  border-color: #007bff;\r\n  outline: none;\r\n}\r\n\r\n/* Placeholder color */\r\n::placeholder {\r\n  color: #aaa;\r\n}\r\n\r\n.invalid {\r\n  margin: auto;\r\n  color: var(--danger-clr);\r\n}\r\n\r\nbutton{\r\n  border-radius: .2rem;\r\n  border: none;\r\n}\r\n\r\n@media only screen and (max-width: 70rem) {\r\n  .wrapper.grid {\r\n    display: block;\r\n  }\r\n  div.container,\r\n  .wrapper.grid {\r\n    height: fit-content;\r\n  }\r\n  aside.left-side {\r\n    border: none;\r\n  }\r\n  .modal-content {\r\n    width: 100%;\r\n    height: 100%;\r\n  }\r\n  div.modal-content,\r\n  .modal-content form {\r\n    padding: 0;\r\n    margin: 0;  \r\n    border-radius: 0;\r\n  }\r\n  textarea,\r\n  input {\r\n    width: 80vw;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23188,4 +23214,4 @@ run();
 
 /******/ })()
 ;
-//# sourceMappingURL=index.29cfda81a5410033a286.js.map
+//# sourceMappingURL=index.d2973509d88f84201dde.js.map

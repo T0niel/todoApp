@@ -154,6 +154,7 @@ table {
   --agree-clr: #50c878;
   --agree-clr-hover: #1e9f49;
   --danger-clr: #e03e39;
+  --hot-danger-clr: #f92b24;
 }
 
 body {
@@ -225,13 +226,19 @@ button {
 }
 
 .create-btn,
-.create-project-btn,
-.new-todo-btn {
+.create-project-btn{
   background-color: var(--agree-clr);
   border: none;
   color: white;
   padding: 0.6rem 1rem;
   display: inline-block;
+}
+
+.new-todo-btn{
+  background-color: var(--agree-clr);
+  color: white;
+  width: 40px;
+  height: 40px;
 }
 
 .create-project-btn {
@@ -249,9 +256,14 @@ button {
 
 .card {
   padding: 1rem;
-  box-shadow: 0px 0px 50px var(--secondary-background-clr);
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.026);
   overflow-x: auto;
   height: 100%;
+}
+
+.card:hover{
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.104);
+  transition: 2s ease-in-out;
 }
 
 .card .title {
@@ -288,7 +300,7 @@ button {
 }
 
 .remove-btn:hover {
-  background-color: var(--danger-clr);
+  background-color: var(--hot-danger-clr);
 }
 
 .create-btn:hover,
@@ -324,6 +336,7 @@ button {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  border-radius: 1rem;
 }
 
 textarea {
@@ -379,6 +392,12 @@ input {
   margin-bottom: 15px;
   transition: border-color 0.3s ease;
   width: 100%;
+  border-left: 5px solid var(--agree-clr);
+}
+
+textarea:invalid,
+input:invalid{
+  border-left: 5px solid var(--danger-clr);
 }
 
 input[type="color"] {
@@ -410,6 +429,11 @@ input:focus {
   color: var(--danger-clr);
 }
 
+button{
+  border-radius: .2rem;
+  border: none;
+}
+
 @media only screen and (max-width: 70rem) {
   .wrapper.grid {
     display: block;
@@ -428,7 +452,8 @@ input:focus {
   div.modal-content,
   .modal-content form {
     padding: 0;
-    margin: 0;
+    margin: 0;  
+    border-radius: 0;
   }
   textarea,
   input {
