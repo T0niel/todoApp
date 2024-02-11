@@ -52,7 +52,9 @@ export default function (
   //Check for updates on time every 1 min
   setInterval(() => {
     if(printing)
+    {
       print();
+    }
   }, updateTimage);
 
   return {

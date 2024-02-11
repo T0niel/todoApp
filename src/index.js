@@ -63,7 +63,7 @@ const run = () => {
   }
 
   function saveCurrentProjectToLocalStorage() {
-    if (storageAvailable("localStorage")) {
+    if (storageAvailable("localStorage") && currentProject !== null) {
       let localProjects = localStorage.getItem("Projects");
       if (localProjects === null) {
         localStorage.setItem("Projects", "[]");
@@ -106,6 +106,12 @@ const run = () => {
           let objects = [];
 
           let localProj = project(obj.name, reset, objects);
+
+          /*
+          Make sure we stop automaticly printing the copy project.
+          stopPrinting() will stop automaticly printing these projects.
+          */
+          localProj.stopPrinting();
 
           obj[obj.name].forEach((todoObj) => {
             objects.push(
@@ -179,10 +185,10 @@ const run = () => {
       btn.classList.add("project-btn");
       btn.addEventListener("click", () => {
         currentProject = project;
-        
-        projects.forEach(project => {
-          project.stopPrinting();
-        })
+
+        projects.forEach((proj) => {
+          proj.stopPrinting();
+        });
 
         currentProject.startPrinting();
 
@@ -310,9 +316,8 @@ const run = () => {
     console.log(obj.duedate);
     if (typeof obj.duedate !== "string")
       dateInput.value = obj.duedate.toISOString().split(".")[0];
-    else
-      dateInput.value = (new Date(obj.duedate)).toISOString().split(".")[0];
-    
+    else dateInput.value = new Date(obj.duedate).toISOString().split(".")[0];
+
     colorInput.value = obj.color;
     priorityInput.value = obj.priority;
     titleInput.value = obj.title;
