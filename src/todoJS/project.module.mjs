@@ -2,7 +2,8 @@ export default function (
   name,
   reset = null,
   dataObjs = null,
-  updateTimage = 1 * 60 * 1000
+  dateOfCreation = null,
+  updateTimage = 1 * 60 * 1000, 
 ) {
   let objs = [];
   let printing = true;
@@ -59,7 +60,7 @@ export default function (
 
   return {
     insert,
-    creationDate: new Date(),
+    creationDate: dateOfCreation === null ? new Date() : dateOfCreation,
     name,
     print,
     removeObj,

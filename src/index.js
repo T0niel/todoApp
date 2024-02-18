@@ -82,6 +82,7 @@ const run = () => {
             objLocal[index] = {
               name: currentProject.name,
               [currentProject.name]: currentProject.getObjects(),
+              creationDate: currentProject.creationDate,
             };
           }
         }
@@ -91,6 +92,7 @@ const run = () => {
         objLocal.push({
           name: currentProject.name,
           [currentProject.name]: currentProject.getObjects(),
+          creationDate: currentProject.creationDate,
         });
 
       localStorage.setItem("Projects", JSON.stringify(objLocal));
@@ -105,7 +107,12 @@ const run = () => {
         objLocal.forEach((obj) => {
           let objects = [];
 
-          let localProj = project(obj.name, reset, objects);
+          let localProj = project(
+            obj.name,
+            reset,
+            objects,
+            obj.creationDate
+          );
 
           /*
           Make sure we stop automaticly printing the copy project.
@@ -133,7 +140,12 @@ const run = () => {
             );
           });
 
-          localProj = project(obj.name, reset, objects);
+          localProj = project(
+            obj.name,
+            reset,
+            objects,
+            obj.creationDate
+          );
 
           projects.push(localProj);
         });
@@ -209,9 +221,11 @@ const run = () => {
       if (!dayPrinted.includes(project)) {
         printSpecificDateProjects(
           project,
-          project.creationDate.getFullYear() === new Date().getFullYear() &&
-            project.creationDate.getMonth() === new Date().getMonth() &&
-            project.creationDate.getDay() === new Date().getDay(),
+          new Date(project.creationDate).getFullYear() ===
+            new Date().getFullYear() &&
+            new Date(project.creationDate).getMonth() ===
+              new Date().getMonth() &&
+            new Date(project.creationDate).getDate() === new Date().getDate(),
           todayProjects
         );
         dayPrinted.push(project);
@@ -224,8 +238,9 @@ const run = () => {
       if (!monthPrinted.includes(project)) {
         printSpecificDateProjects(
           project,
-          project.creationDate.getFullYear() === new Date().getFullYear() &&
-            project.creationDate.getMonth() === new Date().getMonth(),
+          new Date(project.creationDate).getFullYear() ===
+            new Date().getFullYear() &&
+            new Date(project.creationDate).getMonth() === new Date().getMonth(),
           monthlyProjects
         );
 
@@ -239,8 +254,9 @@ const run = () => {
       if (!weekprinted.includes(project)) {
         printSpecificDateProjects(
           project,
-          project.creationDate.getMonth() === new Date().getMonth() &&
-            new Date().getDay() - project.creationDate.getDay() <= 7,
+          new Date(project.creationDate).getMonth() === new Date().getMonth() &&
+            new Date().getDate() - new Date(project.creationDate).getDate() <=
+              7,
           weekProjects
         );
 
